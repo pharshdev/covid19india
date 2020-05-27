@@ -22,13 +22,17 @@ class AboutScreen extends StatelessWidget {
   Widget _faqWidget(
       {@required String question, @required String answer, context}) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(question, style: Theme.of(context).textTheme.headline6),
+      Text(question,
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              .copyWith(fontWeight: FontWeight.w900)),
       SizedBox(height: 8.0),
       Text(answer,
           style: Theme.of(context)
               .textTheme
               .headline6
-              .apply(color: Colors.blueAccent)),
+              .copyWith(color: Colors.blueAccent, fontWeight: FontWeight.w900)),
       SizedBox(height: 24.0)
     ]);
   }

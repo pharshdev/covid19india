@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:covid19india/blocs/bloc/cloud_bloc.dart';
 import 'package:covid19india/models/national_data.dart';
 import 'package:covid19india/widgets/screen.dart';
@@ -44,14 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                           height: 70.0,
                           child: FloatingSearchBar(
+                            onTap: () =>
+                                BotToast.showText(text: 'Coming soon!'),
                             leading: Icon(Icons.search),
                             children: [],
                             title: Text(''),
                             pinned: true,
                             body: Container(),
                             trailing: IconButton(
-                                icon: Icon(Icons.favorite_border, size: 20.0),
-                                onPressed: () {}),
+                                icon: Icon(Icons.favorite_border,
+                                    color: Colors.red, size: 20.0),
+                                onPressed: () =>
+                                    BotToast.showText(text: 'Coming soon!')),
                           )),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .caption
                                   .copyWith(fontWeight: FontWeight.bold)),
                           IconButton(
-                              icon: Icon(Icons.chat_bubble_outline, size: 15.0),
+                              icon: Icon(Icons.notifications_none, size: 15.0),
                               onPressed: () {})
                         ],
                       ),

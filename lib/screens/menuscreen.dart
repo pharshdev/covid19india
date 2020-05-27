@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:bot_toast/bot_toast.dart';
+import 'package:covid19india/repo/common.dart';
 import 'package:covid19india/screens/aboutscreen.dart';
 import 'package:covid19india/screens/essentials.dart';
 import 'package:covid19india/widgets/screen.dart';
@@ -22,9 +24,13 @@ class MenuScreen extends StatelessWidget {
                 Navigator.pop(context);
               }),
           Divider(),
-          ListTile(title: Text('Demographics'), onTap: () {}),
+          ListTile(
+              title: Text('Demographics'),
+              onTap: () => BotToast.showText(text: 'Coming soon!')),
           Divider(),
-          ListTile(title: Text('Deep Dive'), onTap: () {}),
+          ListTile(
+              title: Text('Deep Dive'),
+              onTap: () => BotToast.showText(text: 'Coming soon!')),
           Divider(),
           ListTile(
               title: Text('Essentials'),
@@ -54,31 +60,34 @@ class MenuScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.only(left: 16.0),
             child: Text('A crowdsourced initiative',
-                style: Theme.of(context)
-                    .textTheme
-                    .caption
-                    .apply(color: Colors.grey[800])),
+                style: Theme.of(context).textTheme.caption.copyWith(
+                    color: Colors.grey[700], fontWeight: FontWeight.w900)),
           ),
           Spacer(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              padding: const EdgeInsets.all(8.0),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text('Made with ',
                     style: Theme.of(context)
                         .textTheme
                         .caption
                         .apply(color: Colors.grey[800])),
                 Icon(Icons.favorite, color: Colors.red, size: 20.0),
-                Text(' by HARSH',
+                Text(' by ',
                     style: Theme.of(context)
                         .textTheme
                         .caption
-                        .apply(color: Colors.grey[800]))
-              ],
-            ),
-          )
+                        .apply(color: Colors.grey[800])),
+                InkWell(
+                  onTap: () =>
+                      launchURL(url: 'https://www.linkedin.com/in/pharshdev/'),
+                  child: Text('HARSH P',
+                      style: Theme.of(context).textTheme.caption.apply(
+                          color: Colors.blueAccent,
+                          decoration: TextDecoration.underline)),
+                )
+              ]))
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:covid19india/repo/repo.dart';
 import 'package:covid19india/screens/homescreen.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +41,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: BotToastInit(),
+      navigatorObservers: [BotToastNavigatorObserver()],
       debugShowCheckedModeBanner: false,
       title: 'Covid19India',
       theme: ThemeData(
         fontFamily: GoogleFonts.archivo().fontFamily,
         textTheme: TextTheme(
-            button: TextStyle(
-                color: Colors.black54, fontWeight: FontWeight.bold)),
+            button:
+                TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
