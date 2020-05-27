@@ -5,6 +5,9 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Screen(
+        onWillPop: () async {
+          Navigator.pop(context);
+        },
         body: Scrollbar(
             child: ListView.builder(
                 padding: const EdgeInsets.all(16.0),
