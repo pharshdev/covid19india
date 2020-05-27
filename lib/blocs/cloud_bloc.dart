@@ -13,7 +13,9 @@ class CloudBloc extends Bloc<CloudEvent, CloudState> {
   final Repo repo;
   NationalData nationalData;
 
-  CloudBloc({@required this.repo}) : assert(repo != null);
+  CloudBloc({@required this.repo}) : assert(repo != null) {
+    repo.loadPrefs();
+  }
   @override
   CloudState get initialState => CloudInitial();
 

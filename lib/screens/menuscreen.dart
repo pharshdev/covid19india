@@ -1,12 +1,14 @@
 import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:covid19india/blocs/cloud_bloc.dart';
 import 'package:covid19india/repo/common.dart';
 import 'package:covid19india/screens/aboutscreen.dart';
 import 'package:covid19india/screens/essentials.dart';
 import 'package:covid19india/widgets/screen.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -49,12 +51,10 @@ class MenuScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (ctx) => AboutScreen()));
               }),
           Divider(),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                  icon: Transform.rotate(
-                      angle: 130 * pi / 180, child: Icon(Icons.brightness_2)),
-                  onPressed: () => changeBrightness(context))),
+          ListTile(
+              onTap: () => changeBrightness(context),
+              leading: Transform.rotate(
+                  angle: 130 * pi / 180, child: Icon(Icons.brightness_2))),
           Divider(),
           SizedBox(height: 24.0),
           Container(
@@ -95,8 +95,9 @@ class MenuScreen extends StatelessWidget {
   }
 
   changeBrightness(context) {
-    bool value = true;
+    bool value = BlocProvider.of<CloudBloc>(context).repo.getNightMode();
     DynamicTheme.of(context)
         .setBrightness(value ? Brightness.dark : Brightness.light);
+    BlocProvider.of<CloudBloc>(context).repo.switchNightMode();
   }
 }

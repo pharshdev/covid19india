@@ -41,26 +41,26 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DynamicTheme(
-      defaultBrightness: Brightness.light,
-      data: (brightness) => ThemeData(
-        brightness: brightness,
-        fontFamily: GoogleFonts.archivo().fontFamily,
-        textTheme: TextTheme(
-            button:
-                TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      themedWidgetBuilder: (context, theme) => MaterialApp(
-        builder: BotToastInit(),
-        navigatorObservers: [BotToastNavigatorObserver()],
-        debugShowCheckedModeBanner: false,
-        title: 'Covid19India',
-        theme: theme,
-        home: BlocProvider(
-          create: (context) => CloudBloc(repo: repo),
-          child: HomeScreen(),
+    return BlocProvider(
+      create: (context) => CloudBloc(repo: repo),
+      child: DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (brightness) => ThemeData(
+          brightness: brightness,
+          fontFamily: GoogleFonts.archivo().fontFamily,
+          textTheme: TextTheme(
+              button: TextStyle(
+                  color: Colors.black54, fontWeight: FontWeight.bold)),
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        themedWidgetBuilder: (context, theme) => MaterialApp(
+          builder: BotToastInit(),
+          navigatorObservers: [BotToastNavigatorObserver()],
+          debugShowCheckedModeBanner: false,
+          title: 'Covid19India',
+          theme: theme,
+          home: HomeScreen(),
         ),
       ),
     );
