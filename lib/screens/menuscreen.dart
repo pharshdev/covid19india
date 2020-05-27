@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:covid19india/screens/aboutscreen.dart';
 import 'package:covid19india/widgets/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,13 @@ class MenuScreen extends StatelessWidget {
           Divider(),
           ListTile(title: Text('Essentials'), onTap: () {}),
           Divider(),
-          ListTile(title: Text('About'), onTap: () {}),
+          ListTile(
+              title: Text('About'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => AboutScreen()));
+              }),
           Divider(),
           Align(
               alignment: Alignment.centerLeft,

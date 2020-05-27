@@ -29,7 +29,8 @@ flutter:
     - family: Archia
       fonts:
         - asset: assets/font/archia-regular.ttf
-
+  assets:
+    - assets/essentials.png
   
   
   
