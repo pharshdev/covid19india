@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:covid19india/blocs/cloud_bloc.dart';
 import 'package:covid19india/models/national_data.dart';
@@ -12,7 +14,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+  Timer _dataFetchTimer;
   NationalData _nationalData;
   final formatter = NumberFormat("#,##,###");
 
@@ -20,6 +23,26 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<CloudBloc>(context).add(FetchNationalData());
+    // Auto update every 10 sec
+    _dataFetchTimer = Timer.periodic(Duration(seconds: 10),
+        (_) => BlocProvider.of<CloudBloc>(context).add(FetchNationalData()));
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.inactive)
+      _dataFetchTimer?.cancel();
+    else if (state == AppLifecycleState.resumed) {
+      _dataFetchTimer?.cancel();
+      _dataFetchTimer = Timer.periodic(Duration(seconds: 10),
+          (_) => BlocProvider.of<CloudBloc>(context).add(FetchNationalData()));
+    }
+  }
+
+  @override
+  void dispose() {
+    _dataFetchTimer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -61,14 +84,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('27 May, 10:12 AM IST',
+                          Text(_nationalData.statewise.first.lastupdatedtime,
                               style: Theme.of(context)
                                   .textTheme
                                   .caption
                                   .copyWith(fontWeight: FontWeight.bold)),
                           IconButton(
                               icon: Icon(Icons.notifications_none, size: 15.0),
-                              onPressed: () {})
+                              onPressed: () =>
+                                  BotToast.showText(text: 'Coming soon!'))
                         ],
                       ),
                       SizedBox(height: 16.0),
@@ -205,8 +229,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .caption
-                                    .apply(
-                                        color: Colors.black,
+                                    .copyWith(
+                                        fontWeight: FontWeight.bold,
                                         decorationStyle:
                                             TextDecorationStyle.dashed)),
                           ]))),

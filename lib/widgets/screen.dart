@@ -27,7 +27,7 @@ class Screen extends StatelessWidget {
                 child: Text('English',
                     style: Theme.of(context)
                         .textTheme
-                        .button
+                        .subtitle1
                         .copyWith(fontSize: 12.0)),
               ),
               Spacer(),
@@ -53,7 +53,7 @@ class Screen extends StatelessWidget {
                 child: Text(isMenu != null && isMenu ? 'Close' : 'Menu',
                     style: Theme.of(context)
                         .textTheme
-                        .button
+                        .subtitle1
                         .copyWith(fontSize: 12.0)),
               ),
             ]),

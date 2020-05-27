@@ -10,6 +10,8 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'homescreen.dart';
+
 class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,15 +26,20 @@ class MenuScreen extends StatelessWidget {
           ListTile(
               title: Text('Home'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
               }),
           Divider(),
           ListTile(
               title: Text('Demographics'),
+              trailing: Text('Coming soon',
+                  style: Theme.of(context).textTheme.caption),
               onTap: () => BotToast.showText(text: 'Coming soon!')),
           Divider(),
           ListTile(
               title: Text('Deep Dive'),
+              trailing: Text('Coming soon',
+                  style: Theme.of(context).textTheme.caption),
               onTap: () => BotToast.showText(text: 'Coming soon!')),
           Divider(),
           ListTile(

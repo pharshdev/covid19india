@@ -1,13 +1,14 @@
-import 'package:covid19india/models/national_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'data_store.dart';
+import 'api_client.dart';
 
 class Repo {
+  final ApiClient apiClient = ApiClient();
   SharedPreferences userPrefs;
 
   Future<void> loadPrefs() async {
     userPrefs = await SharedPreferences.getInstance();
+    return;
   }
 
   void switchNightMode() async {
@@ -19,6 +20,6 @@ class Repo {
   }
 
   Future<dynamic> getNationalData() {
-    return Future.value(nationalDataFromJson(nationalData));
+    return apiClient.fetchNationalData();
   }
 }
