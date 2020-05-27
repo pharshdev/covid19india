@@ -1,5 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:covid19india/blocs/bloc/cloud_bloc.dart';
+import 'package:covid19india/blocs/cloud_bloc.dart';
 import 'package:covid19india/models/national_data.dart';
 import 'package:covid19india/widgets/screen.dart';
 import 'package:floating_search_bar/floating_search_bar.dart';
