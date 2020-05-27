@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             pinned: true,
                             body: Container(),
                             trailing: IconButton(
-                                icon: Icon(Icons.star_border, size: 20.0),
+                                icon: Icon(Icons.favorite_border, size: 20.0),
                                 onPressed: () {}),
                           )),
                       Row(

@@ -1,11 +1,13 @@
 import 'package:covid19india/screens/homescreen.dart';
+import 'package:covid19india/screens/menuscreen.dart';
 import 'package:flutter/material.dart';
 
 class Screen extends StatelessWidget {
   final Widget body;
   final Function onWillPop;
+  final bool isMenu;
 
-  Screen({this.body, this.onWillPop});
+  Screen({this.body, this.onWillPop, this.isMenu});
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +46,11 @@ class Screen extends StatelessWidget {
               ])),
               Spacer(),
               FlatButton(
-                onPressed: () {},
-                child: Text('Menu',
+                onPressed: () => isMenu != null && isMenu
+                    ? Navigator.pop(context)
+                    : Navigator.push(context,
+                        MaterialPageRoute(builder: (ctx) => MenuScreen())),
+                child: Text(isMenu != null && isMenu ? 'Close' : 'Menu',
                     style: Theme.of(context)
                         .textTheme
                         .button
