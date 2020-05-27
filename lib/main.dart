@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:covid19india/repo/repo.dart';
 import 'package:covid19india/screens/homescreen.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,12 +41,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: BotToastInit(),
-      navigatorObservers: [BotToastNavigatorObserver()],
-      debugShowCheckedModeBanner: false,
-      title: 'Covid19India',
-      theme: ThemeData(
+    return DynamicTheme(
+      defaultBrightness: Brightness.light,
+      data: (brightness) => ThemeData(
+        brightness: brightness,
         fontFamily: GoogleFonts.archivo().fontFamily,
         textTheme: TextTheme(
             button:
@@ -53,9 +52,16 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: BlocProvider(
-        create: (context) => CloudBloc(repo: repo),
-        child: HomeScreen(),
+      themedWidgetBuilder: (context, theme) => MaterialApp(
+        builder: BotToastInit(),
+        navigatorObservers: [BotToastNavigatorObserver()],
+        debugShowCheckedModeBanner: false,
+        title: 'Covid19India',
+        theme: theme,
+        home: BlocProvider(
+          create: (context) => CloudBloc(repo: repo),
+          child: HomeScreen(),
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:covid19india/repo/common.dart';
 import 'package:covid19india/screens/aboutscreen.dart';
 import 'package:covid19india/screens/essentials.dart';
 import 'package:covid19india/widgets/screen.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -53,7 +54,7 @@ class MenuScreen extends StatelessWidget {
               child: IconButton(
                   icon: Transform.rotate(
                       angle: 130 * pi / 180, child: Icon(Icons.brightness_2)),
-                  onPressed: null)),
+                  onPressed: () => changeBrightness(context))),
           Divider(),
           SizedBox(height: 24.0),
           Container(
@@ -91,5 +92,11 @@ class MenuScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  changeBrightness(context) {
+    bool value = true;
+    DynamicTheme.of(context)
+        .setBrightness(value ? Brightness.dark : Brightness.light);
   }
 }
